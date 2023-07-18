@@ -56,7 +56,7 @@ function LibLoader:UninjectLib(libName: String)
         -- get rid of cons
         if libName == 'lPlayer' then
             if not lPlayer then return end
-            for i,v in pairs(lPlayer.Connections) do
+            for i,v in pairs(lPlayer.Connctions) do
                 if type(v) == 'userdata' then
                     v:Disconnect()
                 end
