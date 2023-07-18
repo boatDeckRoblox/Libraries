@@ -9,7 +9,7 @@ LibLoader.LibNames = {
 
 
 function LibLoader:LoadLib(lib)
-    if lib and loadedLib == "" then
+    if lib then
         LibLoader[lib]()
         return
     end
@@ -26,10 +26,15 @@ function LibLoader:GetLibs()
 end
 
 
+
 function LibLoader:UninjectLib(libName: String)
     if libName == nil then
-
-        Region3
+        for i,v in pairs(LibLoader) do
+            if type(v) == 'function' and geit then
+                
+            end
+        end
+    end
     if libName and libName ~= '' and getgenv()[libName] then
         -- get rid of cons
         if libName == 'lPlayer' then
@@ -66,6 +71,7 @@ function LibLoader:GetLibProperty(libName, propName)
     LibLoader:UninjectLib(libName)
     return toRturn
 end
+
 
 
 return LibLoader
