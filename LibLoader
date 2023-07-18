@@ -1,7 +1,7 @@
 local LibLoader = {}
 
 LibLoader.LibNames = {
-    lPlayer = game:HttpGet("https://pastebin.com/raw/LJdyTq8X"
+    lPlayer = game:HttpGet("https://pastebin.com/raw/LJdyTq8X")
 }
 
 
