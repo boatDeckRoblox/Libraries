@@ -37,9 +37,10 @@ function LibLoader:UninjectLib(libName: String)
         local lastfunc = nil
         for i,v in pairs(LibLoader) do
             if type(v) == 'function' and getinfo(v).name ~= 'UninjectLib' then
+                lastfunc = v
                 v = function() end
                 v = nil
-                lastfunc = v
+                
             end
         end
         print(lastfunc)
