@@ -1,16 +1,14 @@
 local LibLoader = {}
 
 LibLoader.LibNames = {
-    ['lPlayer'] = function()
-        loadstring(game:HttpGet("https://pastebin.com/raw/LJdyTq8X",true))()
-    end,
+    lPlayer = loadstring(game:HttpGet("https://pastebin.com/raw/LJdyTq8X",true))()
 }
 
 
 
 function LibLoader:LoadLib(lib)
     if lib then
-        LibLoader[lib]()
+        loadstring(LibLoader[lib])
         return
     end
 end
