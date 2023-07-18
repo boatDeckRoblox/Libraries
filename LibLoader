@@ -56,25 +56,27 @@ function LibLoader:UninjectLib(libName: String)
         -- get rid of cons
         if libName == 'lPlayer' then
             if not lPlayer then return end
+        if Player.Connctions then
             for i,v in pairs(lPlayer.Connctions) do
-    if type(v) == 'userdata' then
-        v:Disconnect()
+                if type(v) == 'userdata' then
+                    v:Disconnect()
+                end
+            end
     end
-end
---main lplr thingy
-lPlayer.LocalPlayer = nil
-for i,v in pairs(lPlayer) do
-    if type(v) == 'function' then
-        print(i)
-        lPlayer[i] = function() end
-        lPlayer[i] = nil
-    else
-        print(i)
-        lPlayer[i] = ""
-        lPlayer[i] = nil
+    --main lplr thingy
+    lPlayer.LocalPlayer = nil
+    for i,v in pairs(lPlayer) do
+        if type(v) == 'function' then
+            print(i)
+            lPlayer[i] = function() end
+            lPlayer[i] = nil
+        else
+            print(i)
+            lPlayer[i] = ""
+            lPlayer[i] = nil
+        end
     end
-end
-lPlayer = nil
+    lPlayer = nil
     end
 end
 
