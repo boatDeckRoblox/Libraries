@@ -29,12 +29,23 @@ end
 
 function LibLoader:UninjectLib(libName: String)
     if libName == nil then
+        local lastfunc = nil
         for i,v in pairs(LibLoader) do
-            if type(v) == 'function' and geit then
-                
+            if type(v) == 'function' and getinfo(v).name ~= 'UninjectLib' then
+                v = function() end
+                v = nil
+                lastfunc = v
+            end
+        end
+        print(lastfunc)
+        for i,v in pairs(LibLoader) do
+            if type(v) == 'function' then
+                v = function() end
+                v = nil
             end
         end
     end
+    
     if libName and libName ~= '' and getgenv()[libName] then
         -- get rid of cons
         if libName == 'lPlayer' then
