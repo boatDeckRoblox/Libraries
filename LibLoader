@@ -4,11 +4,19 @@ LibLoader.LibNames = {
     lPlayer = game:HttpGet("https://pastebin.com/raw/LJdyTq8X")
 }
 
+function LibLoader:GetLibLS(n)
+    if n then
+        if n == 'lPlayer' then
+            return game:HttpGet("https://pastebin.com/raw/LJdyTq8X")
+        end
+    end
+end
+
 
 
 function LibLoader:LoadLib(lib)
     if lib then
-        loadstring(LibLoader[lib], true)()
+        loadstring(tostring(LibLoader:GetLibLS(lib)), true)()
     end
 end
 
