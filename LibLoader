@@ -46,7 +46,7 @@ function LibLoader:UninjectLib(libName: String)
             end
             --main lplr thingy
             lPlayer.LocalPlayer = nil
-            for i,v in pairs(lPlayer) then
+            for i,v in pairs(lPlayer) do
                 if type(v) == 'function' then
                     lPlayer[i] = function() end
                     lPlayer[i] = nil
