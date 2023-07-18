@@ -63,21 +63,22 @@ function LibLoader:UninjectLib(libName: String)
                     v:Disconnect()
                 end
             end
-    end
+    	end
     --main lplr thingy
-    lPlayer.LocalPlayer = nil
-    for i,v in pairs(lPlayer) do
-        if type(v) == 'function' then
-            print(i)
-            lPlayer[i] = function() end
-            lPlayer[i] = nil
-        else
-            print(i)
-            lPlayer[i] = ""
-            lPlayer[i] = nil
-        end
+    	lPlayer.LocalPlayer = nil
+    	for i,v in pairs(lPlayer) do
+        	if type(v) == 'function' then
+        	    print(i)
+        	    lPlayer[i] = function() end
+        	    lPlayer[i] = nil
+        	else
+        	    print(i)
+        	    lPlayer[i] = ""
+        	    lPlayer[i] = nil
+        	end
+    	end
+    	lPlayer = nil
     end
-    lPlayer = nil
     end
 end
 
