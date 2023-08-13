@@ -53,7 +53,7 @@ function LibLoader:UninjectLib(libName: String)
     end
     
     if libName and libName ~= '' and getgenv()[libName] then
-        if libName == 'lPlayer'
+        if libName == 'lPlayer' then
         	for i,v in pairs(lPlayer.Connctions) do
         if type(v) == 'userdata' then
             v:Disconnect()
