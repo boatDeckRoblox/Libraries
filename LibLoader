@@ -1,8 +1,8 @@
 local LibLoader = {}
 
 LibLoader.LibNames = {
-    lPlayer = game:HttpGet("https://pastebin.com/raw/LJdyTq8X");
-    AntiCheat = game:HttpGet("https://pastebin.com/raw/TXFzpPcd");
+    lPlayer = game:HttpGet("https://pastebin.com/raw/LJdyTq8X"),
+    AntiCheat = game:HttpGet("https://pastebin.com/raw/TXFzpPcd"),
 }
 
 
