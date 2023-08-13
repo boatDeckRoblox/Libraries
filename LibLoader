@@ -2,14 +2,13 @@ local LibLoader = {}
 
 LibLoader.LibNames = {
     lPlayer = game:HttpGet("https://pastebin.com/raw/LJdyTq8X")
+    AntiCheat = game:HttpGet("https://pastebin.com/raw/TXFzpPcd")
 }
 
 
 function LibLoader:GetLibLS(n)
-    if n then
-        if n == 'lPlayer' then
-            return game:HttpGet("https://pastebin.com/raw/LJdyTq8X")
-        end
+    if n and LibLoader.LibNames[n] then
+        return LibLoader.LibNames[n]
     end
 end
 
@@ -54,44 +53,37 @@ function LibLoader:UninjectLib(libName: String)
     end
     
     if libName and libName ~= '' and getgenv()[libName] then
-        -- get rid of cons
-        if libName == 'lPlayer' then
-            if not lPlayer then return end
-       
-            for i,v in pairs(lPlayer.Connctions) do
-                if type(v) == 'userdata' then
-                    v:Disconnect()
-                end
-            end
-    	
+        if libName == 'lPlayer'
+        	for i,v in pairs(lPlayer.Connctions) do
+        if type(v) == 'userdata' then
+            v:Disconnect()
+        end
+    end
+    for i,v in pairs(lPlayer) do
+        if i == 'Folder' or i == 'lPlayerFolder' then
+            v:Destroy()
+        end
+    end
     --main lplr thingy
-    	lPlayer.LocalPlayer = nil
-    	for i,v in pairs(lPlayer) do
-        	if type(v) == 'function' then
-        	    print(i)
-        	    lPlayer[i] = function() end
-        	    lPlayer[i] = nil
-        	else
-        	    print(i)
-        	    lPlayer[i] = ""
-        	    lPlayer[i] = nil
-        	end
-    	end
-    	lPlayer = nil
+    lPlayer.LocalPlayer = nil
+    for i,v in pairs(lPlayer) do
+		if i ~= "Folder" or i ~= "lPlayerFolder" then
+        if type(v) == 'function' then
+            lPlayer[i] = function() end
+            lPlayer[i] = nil
+        else
+            lPlayer[i] = ""
+            lPlayer[i] = nil
+        end
+	end
     end
-    end
+    for i,v in pairs(getgenv()) do
+	if i == 'lPlayer' then
+		getgenv()[i] = nil -- y do i have to do this :skull:
+	end
 end
-
-
-
-function LibLoader:GetLibProperty(libName, propName)
-    local toRturn = ""
-    LibLoader:LoadLib(libName)
-    local t = 0
-    repeat task.wait(.1) t += .5 until getgenv()[libName] or t == 5
-    toRturn = libName[propName]
-    LibLoader:UninjectLib(libName)
-    return toRturn
+end
+    end
 end
 
 
