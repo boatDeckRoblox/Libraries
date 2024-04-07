@@ -5,18 +5,15 @@ LibLoader.LibNames = {
     AntiCheat = game:HttpGet("https://pastebin.com/raw/TXFzpPcd"),
 }
 
-
 function LibLoader:GetLibLS(n)
     if n and LibLoader.LibNames[n] then
         return LibLoader.LibNames[n]
     end
 end
 
-
-
 function LibLoader:LoadLib(lib)
     if lib then
-        loadstring(tostring(LibLoader:GetLibLS(lib)), true)()
+        loadstring(LibLoader:GetLibLS(lib))()
     end
 end
 
@@ -24,68 +21,32 @@ function LibLoader:GetLibs()
     local said = {}
     for i,v in pairs(LibLoader.LibNames) do
         if v and not table.find(said, v) then
-            table.insert(said,v)
+            table.insert(said, v)
         end
     end
     return said
 end
 
-
-
-function LibLoader:UninjectLib(libName: String)
-    if libName == nil then
-        local lastfunc = nil
-        for i,v in pairs(LibLoader) do
-            if type(v) == 'function' and getinfo(v).name ~= 'UninjectLib' then
-                lastfunc = v
-                v = function() end
-                v = nil
-                
+function LibLoader:UninjectLib(libName)
+    if libName == 'lPlayer' and lPlayer then
+        for i,v in pairs(lPlayer) do
+            if i == 'Connections' then
+                for _, conn in pairs(v) do
+                    if type(conn) == 'userdata' then
+                        conn:Disconnect()
+                    end
+                end
+            elseif i == 'Folder' or i == 'lPlayerFolder' then
+                v:Destroy()
+            elseif i ~= "Folder" and i ~= "lPlayerFolder" then
+                if type(v) == 'function' then
+                    lPlayer[i] = function() end
+                end
+                lPlayer[i] = nil
             end
         end
-        print(lastfunc)
-        for i,v in pairs(LibLoader) do
-            if type(v) == 'function' then
-                v = function() end
-                v = nil
-            end
-        end
-    end
-    
-    if libName and libName ~= '' and getgenv()[libName] then
-        if libName == 'lPlayer' then
-        	for i,v in pairs(lPlayer.Connctions) do
-        if type(v) == 'userdata' then
-            v:Disconnect()
-        end
-    end
-    for i,v in pairs(lPlayer) do
-        if i == 'Folder' or i == 'lPlayerFolder' then
-            v:Destroy()
-        end
-    end
-    --main lplr thingy
-    lPlayer.LocalPlayer = nil
-    for i,v in pairs(lPlayer) do
-		if i ~= "Folder" or i ~= "lPlayerFolder" then
-        if type(v) == 'function' then
-            lPlayer[i] = function() end
-            lPlayer[i] = nil
-        else
-            lPlayer[i] = ""
-            lPlayer[i] = nil
-        end
-	end
-    end
-    for i,v in pairs(getgenv()) do
-	if i == 'lPlayer' then
-		getgenv()[i] = nil -- y do i have to do this :skull:
-	end
-end
-end
+        getgenv().lPlayer = nil
     end
 end
-
-
 
 return LibLoader
