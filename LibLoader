@@ -1,8 +1,13 @@
 local LibLoader = {}
 
+function GetLib(tag)
+    return game:HttpGet("https://pastebin.com/raw/..tag)
+end
+
 LibLoader.LibNames = {
-    lPlayer = game:HttpGet("https://pastebin.com/raw/LJdyTq8X"),
-    AntiCheat = game:HttpGet("https://pastebin.com/raw/TXFzpPcd"),
+    lPlayer = GetLib("LJdyTq8X"),
+    AntiCheat = GetLib(TXFzpPcd"),
+    Notif = GetLib("26iQWeJN").
 }
 
 function LibLoader:GetLibLS(n)
