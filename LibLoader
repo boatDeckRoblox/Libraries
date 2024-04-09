@@ -1,13 +1,13 @@
 local LibLoader = {}
 
 function GetLib(tag)
-    return game:HttpGet("https://pastebin.com/raw/..tag)
+    return game:HttpGet("https://pastebin.com/raw/" .. tag)
 end
 
 LibLoader.LibNames = {
     lPlayer = GetLib("LJdyTq8X"),
-    AntiCheat = GetLib(TXFzpPcd"),
-    Notif = GetLib("26iQWeJN").
+    AntiCheat = GetLib("TXFzpPcd"),
+    Notif = GetLib("26iQWeJN")
 }
 
 function LibLoader:GetLibLS(n)
@@ -18,19 +18,25 @@ end
 
 function LibLoader:LoadLib(lib)
     if lib then
-        loadstring(LibLoader:GetLibLS(lib))()
+        local libString = LibLoader:GetLibLS(lib)
+        if libString then
+            loadstring(libString)()
+        else
+            error("Library not found: " .. lib)
+        end
     end
 end
 
 function LibLoader:GetLibs()
     local said = {}
-    for i,v in pairs(LibLoader.LibNames) do
-        if v and not table.find(said, v) then
+    for _, v in pairs(LibLoader.LibNames) do
+        if v and not table.indexOf(said, v) then
             table.insert(said, v)
         end
     end
     return said
 end
+
 
 function LibLoader:UninjectLib(libName)
     if libName == 'lPlayer' and lPlayer then
