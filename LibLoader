@@ -5,14 +5,16 @@ function GetLib(tag)
 end
 
 LibLoader.LibNames = {
-    lPlayer = GetLib("LJdyTq8X"),
-    AntiCheat = GetLib("TXFzpPcd"),
-    Notif = GetLib("26iQWeJN")
+    lPlayer = ("LJdyTq8X"),
+    AntiCheat = ("TXFzpPcd"),
+    Notif = ("26iQWeJN"),
+    Scripting = ("9dHpJYuZ"),
 }
 
 function LibLoader:GetLibLS(n)
     if n and LibLoader.LibNames[n] then
-        return LibLoader.LibNames[n]
+        
+        return GetLib(LibLoader.LibNames[n])
     end
 end
 
