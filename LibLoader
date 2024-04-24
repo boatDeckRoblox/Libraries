@@ -14,7 +14,7 @@ LibLoader.LibNames = {
 function LibLoader:GetLibLS(n)
     if n and LibLoader.LibNames[n] then
         
-        return GetLib(LibLoader.LibNames[n])
+        return (LibLoader.LibNames[n])
     end
 end
 
@@ -22,7 +22,7 @@ function LibLoader:LoadLib(lib)
     if lib then
         local libString = LibLoader:GetLibLS(lib)
         if libString then
-            loadstring(libString)()
+            loadstring(GetLib(libString))()
         else
             error("Library not found: " .. lib)
         end
